@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PIE USM SVM{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('{% static "img/svm.jpg" %}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .navbar {
+            background-color: #074469;
+        }
+        .navbar-nav {
+            margin-left: auto;
+        }
+        .navbar-nav .nav-item {
+            padding-left: 10px;
+        }
+        table {
+            background-color: rgba(255, 255, 255, 0.7); 
+            border-radius: 10px; 
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px; 
+        }
+    </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <img src="{% static 'img/Barra Colores.png' %}" alt="" height="50px">
+    <a class="navbar-brand text-white" href="#">PIE USM SVM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    {% if request.user.is_authenticated  %}
+      <hr>Que bueno que hayas vuelto {{user.username}}
+    {% endif %}
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link text-white" href="{% url 'UTFSM' %}">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'login' %}">Iniciar Sesión</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'logout' %}">Cerrar Sesión</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'docente' %}">Patrocinar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'estudiante' %}">Sitio Estudiante</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="container mt-4">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<h1>Lista de Proyectos Patrocinados:</h1>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre del Proyecto</th>
+                <th>Estudiante</th>
+                <th>Patrocinador</th>
+                <th>Tema</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proyecto in cursos %}
+            {% if proyecto.nombrePatrocinador != "-" %}
+            <tr>
+                <td>{{ proyecto.nombreProyecto }}</td>
+                <td>{{ proyecto.nombreEstudiante }}</td>
+                <td>{{ proyecto.nombrePatrocinador }}</td>
+                <td>{{ proyecto.nombreTema }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

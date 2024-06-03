@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Proyectos Docente{% endblock %}
+
+{% block content %}
+<h1>Proyectos:</h1>
+
+<div class="container">
+    <div class="btn-group mb-3" role="group" aria-label="Filtros">
+        <a href="?filtro=todos" class="btn btn-secondary {% if filtro == 'todos' %}active{% endif %}">Todos</a>
+        <a href="?filtro=patrocinados" class="btn btn-secondary {% if filtro == 'patrocinados' %}active{% endif %}">Patrocinados</a>
+        <a href="?filtro=no_patrocinados" class="btn btn-secondary {% if filtro == 'no_patrocinados' %}active{% endif %}">No Patrocinados</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre del Proyecto</th>
+                <th>Estudiante</th>
+                <th>Patrocinador</th>
+                <th>Tema</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for proyecto in cursos %}
+            <tr>
+                <td>{{ proyecto.nombreProyecto }}</td>
+                <td>{{ proyecto.nombreEstudiante }}</td>
+                <td>{{ proyecto.nombrePatrocinador }}</td>
+                <td>{{ proyecto.nombreTema }}</td>
+                <td>
+                    {% if proyecto.nombrePatrocinador == "-" %}
+                        <a href="{% url 'patrocinar' proyecto.nombreProyecto %}" class="btn btn-primary">Patrocinar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

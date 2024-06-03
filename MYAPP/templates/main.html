@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+  <form action="{% url 'filtrar_proyectos' %}" method="GET">
+    <div class="form-group">
+        <label for="temaProyecto">Filtrar por Tema:</label>
+        <select class="form-control" id="temaProyecto" name="temaProyecto">
+            <option value="">Todos</option>
+            {% for tema in temas %}
+                <option value="{{ tema }}">{{ tema }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+</form>
+</div>
+{% endblock %}

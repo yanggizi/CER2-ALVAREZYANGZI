@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Página Estudiante{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4 text-center">
+            <h2>Bienvenido a la página de estudiante</h2>
+            <a href="{% url 'subir_proyecto' %}" class="btn btn-primary">Ingresa un nuevo proyecto</a>
+            <a href="{% url 'subir_proyecto' %}" class="btn btn-primary">Modificar un proyecto</a>
+        </div>
+    </div>
+{% endblock %}
